@@ -76,10 +76,20 @@ Status View_mp3(MP3ViewInfo *mp3Info)
         "COMM"
     };
 
+    char *display_names[6] =
+    {
+        "TITLE",
+        "ARTIST",
+        "ALBUM",
+        "YEAR",
+        "MUSIC",
+        "COMMENT"
+    };
+
     int i = 0;
     int j;
 
-    printf("\n<-----------------------------Start of view------------------------------->\n");
+    printf("\n<-----------------------------STARTED VIEW------------------------------->\n");
     printf("-------------------------------------------------------------------------\n");
     printf("SI.No\t|\tTAG\t|\tContent\n");
     printf("-------------------------------------------------------------------------\n");
@@ -163,12 +173,12 @@ Status View_mp3(MP3ViewInfo *mp3Info)
     {
         printf("%d\t|\t%s\t|\t%s\n",
                k + 1,
-               tag_names[k],
+               display_names[k],
                data[k]);
     }
 
     printf("-------------------------------------------------------------------------\n");
-    printf("\n<-----------------------------End of view--------------------------------->\n");
+    printf("\n<-----------------------------END OF VIEW--------------------------------->\n");
 
     /* Free allocated memory */
     for (int k = 0; k < 6; k++)

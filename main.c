@@ -5,25 +5,35 @@
 #include "mp3view.h"
 #include "mp3edit.h"
 
+void print_invalid_arguments(void)
+{
+    printf("\n------------------------------------------------\n");
+    
+    printf("\nERROR: ./a.out : INVALID ARGUMENTS\n");
+    printf("USAGE : \n");
+    printf("To view please pass like: ./a.out -v mp3filename\n");
+    printf("To edit please pass like: ./a.out -e -t/-a/-A/-m/-y/-c changing_text mp3filename\n");
+    printf("To get help pass like: ./a.out --help\n");
+    printf("\n------------------------------------------------\n");
+}
+
 void print_help(void)
 {
-    printf("\n--------------- MP3 TAG READER ---------------\n");
+    printf("\n-------------------------HELP MENU-------------------------\n");
 
-    printf("\nVIEW OPERATION:\n");
-    printf("./a.out -v song.mp3\n");
+    printf("\n1. -v -> to view mp3 file contents\n");
 
-    printf("\nEDIT OPERATION:\n");
-    printf("./a.out -e -t \"New Title\" song.mp3\n");
-    printf("./a.out -e -a \"New Artist\" song.mp3\n");
-    printf("./a.out -e -A \"New Album\" song.mp3\n");
-    printf("./a.out -e -y \"2026\" song.mp3\n");
-    printf("./a.out -e -g \"Rock\" song.mp3\n");
-    printf("./a.out -e -c \"New Comment\" song.mp3\n");
+    printf("2. -e -> to edit mp3 file contents\n");
 
-    printf("\nHELP:\n");
-    printf("./a.out --help\n");
+    printf("\t2.1. -t -> to edit song title\n");
+    printf("\t2.2. -a -> to edit artist name\n");
+    printf("\t2.3. -A -> to edit album name\n");
+    printf("\t2.4. -y -> to edit year\n");
+    printf("\t2.5. -m -> to edit music\n");
+    printf("\t2.6. -c -> to edit comment\n");
 
-    printf("\n------------------------------------------------\n");
+    printf("\n----------------------------------------------------------\n");
+
 }
 
 int main(int argc, char *argv[])
@@ -35,8 +45,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        printf("ERROR: Invalid arguments\n");
-        print_help();
+        print_invalid_arguments();
         return e_failure;
     }
 
@@ -52,7 +61,7 @@ int main(int argc, char *argv[])
     {
         if (argc != 3)
         {
-            printf("ERROR: Usage: ./a.out -v song.mp3\n");
+            printf("ERROR: Usage: ./a.out -v sample.mp3\n");
             return e_failure;
         }
 
@@ -95,26 +104,56 @@ int main(int argc, char *argv[])
         if (strcmp(argv[2], "-t") == 0)
         {
             strcpy(editInfo.frame_id, "TIT2");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE TITLE----------\n");
+            printf("\nTITLE     : %s\n",argv[3]);
         }
         else if (strcmp(argv[2], "-a") == 0)
         {
             strcpy(editInfo.frame_id, "TPE1");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE ARTIST---------\n");
+            printf("\nARTIST     : %s\n",argv[3]);
         }
         else if (strcmp(argv[2], "-A") == 0)
         {
             strcpy(editInfo.frame_id, "TALB");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE ALBUM----------\n");
+            printf("\nALBUM     : %s\n",argv[3]);
         }
         else if (strcmp(argv[2], "-y") == 0)
         {
             strcpy(editInfo.frame_id, "TYER");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE YEAR-----------\n");
+            printf("\nYEAR     : %s\n",argv[3]);
         }
-        else if (strcmp(argv[2], "-g") == 0)
+        else if (strcmp(argv[2], "-m") == 0)
         {
             strcpy(editInfo.frame_id, "TCON");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE MUSIC----------\n");
+            printf("\nMUSIC     : %s\n",argv[3]);
         }
         else if (strcmp(argv[2], "-c") == 0)
         {
             strcpy(editInfo.frame_id, "COMM");
+
+            printf("\n------------------------SELECTED EDIT DETAILS------------------------\n");
+            printf("\n-----------SELECTED EDIT OPTION------\n");
+            printf("\n-----------CHANGE THE COMMENT--------\n");
+            printf("\nCOMMENT     : %s\n",argv[3]);
         }
         else
         {
@@ -127,6 +166,19 @@ int main(int argc, char *argv[])
         {
             return e_failure;
         }
+
+        if (strcmp(argv[2], "-t") == 0)
+            printf("\n----------TITLE CHANGED SUCCESSFULLY----------\n");
+        else if (strcmp(argv[2], "-a") == 0)
+            printf("\n----------ARTIST CHANGED SUCCESSFULLY---------\n");
+        else if (strcmp(argv[2], "-A") == 0)
+            printf("\n----------ALBUM CHANGED SUCCESSFULLY----------\n");
+        else if (strcmp(argv[2], "-y") == 0)
+            printf("\n----------YEAR CHANGED SUCCESSFULLY-----------\n");
+        else if (strcmp(argv[2], "-m") == 0)
+            printf("\n----------MUSIC CHANGED SUCCESSFULLY----------\n");
+        else if (strcmp(argv[2], "-c") == 0)
+            printf("\n----------COMMENT CHANGED SUCCESSFULLY---------\n");
 
         return e_success;
     }
